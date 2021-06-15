@@ -11,7 +11,8 @@ use App\Models\Portfolio;
 class MainController extends Controller
 {
   public function index(){
-    return view('welcome');
+    $portfolio = new Portfolio();
+    return view('welcome', ['portfolio' => $portfolio->all()]);
   }
 
   public function review(Request $request){
@@ -21,7 +22,7 @@ class MainController extends Controller
       'phone' => 'required|min:4|max:100',
       'message' => 'required|min:4|max:500'
     ]);
-    
+
     $review = new Review();
     $review->full_name = $request->name;
     $review->email = $request->email;
